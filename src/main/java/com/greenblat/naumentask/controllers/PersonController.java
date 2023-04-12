@@ -26,4 +26,11 @@ public class PersonController {
 
         return "persons/search";
     }
+
+    @GetMapping("/name-by-max-age")
+    public String nameByMaxAge(Model model) {
+        model.addAttribute("namesWithMaxAge", personService.getNameWithMaxAge());
+
+        return "persons/max-age";
+    }
 }

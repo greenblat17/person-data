@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Max Age</title>
+</head>
+<body>
+
+<h1>Name with Max Age</h1>
+
+<div th:each="name : ${namesWithMaxAge}">
+    <span th:text="${name}"></span>
+</div>
+
+</body>
+</html>
