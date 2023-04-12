@@ -1,26 +1,15 @@
 package com.greenblat.naumentask.repositories;
 
 import com.greenblat.naumentask.model.Person;
-import com.greenblat.naumentask.reader.PersonReader;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class PersonRepository {
+public interface PersonRepository extends JpaRepository<Person, Long> {
 
-    private final List<Person> persons;
+    Person findByName(String name);
 
-    public PersonRepository() {
-        persons = new PersonReader().readFile();
-    }
-
-    public int findAgeByName(String name) {
-        for (Person person : persons) {
-            if (person.getName().equals(name)) {
-                return person.getAge();
-            }
-        }
-        return -1;
-    }
+    @Query("SELECT p.age FROM Person p WHERE p.name=:name")
+    int getAgeByName(String name);
 }

@@ -11,6 +11,6 @@ public class PersonService {
     private final PersonRepository personRepository;
 
     public int getAgeByName(String name) {
-        return personRepository.findAgeByName(name);
+        return personRepository.getAgeByName(name);
     }
 }
