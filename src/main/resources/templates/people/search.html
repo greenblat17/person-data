@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Get Age By Person Name</title>
+    <link rel="stylesheet" href="/static/style.css"/>
+    <title>Get Age By Person's Name</title>
+
 </head>
 <body>
 
-<h1>Get Age by person Name</h1>
+<div class="topnav">
+    <a class="active" th:href="@{/people/search}">Get age by name</a>
+    <a th:href="@{/people/count}">Count name</a>
+    <a th:href="@{/people/name-by-max-age}">Max age</a>
+</div>
 
-<form th:method="GET" th:action="@{/people/search/age}">
-    <label for="query">Введите имя: </label>
-    <input type="text" id="query" name="query">
+<div class="main">
+    <h1 class="card1">Get Age by person's Name</h1>
+    <div class="card2">
+        <form th:method="GET" th:action="@{/people/search/age}">
+            <label for="query">Введите имя: </label>
+            <input type="text" id="query" name="query">
+            <br>
+            <input type="submit" value="Искать">
+        </form>
+
+        <div th:if="${age >= 0}">
+            <span class="CardAge" th:text="${'Возраст: ' + age}"/>
+        </div>
+    </div>
     <br>
-    <input type="submit" value="Искать!">
-</form>
+</div>
 
-<br>
 
-<div th:if="${age >= 0}">
-    <span th:text="${age}"/>
+<div class="bottompan">
+    <p> Copyright 2023</p>
 </div>
 
 </body>

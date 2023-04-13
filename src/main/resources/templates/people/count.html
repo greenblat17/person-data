@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="../../static/style.css">
     <meta charset="UTF-8">
     <title>Count</title>
 </head>
 <body>
 
-<h1>Count By Person Name</h1>
+<div class="topnav">
+    <a class="active" th:href="@{/people/search}">Get age by name</a>
+    <a th:href="@{/people/count}">Count name</a>
+    <a th:href="@{/people/name-by-max-age}">Max age</a>
+</div>
 
-<div th:each="person : ${people}">
-  <span th:text="${person.name + ' : ' + person.count}"></span>
+<div class="main">
+    <h1 class="card1">Count By Person Name</h1>
+
+    <div class="card2" th:each="person : ${people}">
+        <span th:text="${person.name + ' : ' + person.count}"></span>
+    </div>
+</div>
+<div class="bottompan">
+    <p> Copyright 2023</p>
 </div>
 
 </body>
