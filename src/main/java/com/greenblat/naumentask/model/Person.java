@@ -24,4 +24,7 @@ public class Person {
 
     @Column(name = "age")
     private int age;
+
+    @Column(name = "count")
+    private Long count;
 }

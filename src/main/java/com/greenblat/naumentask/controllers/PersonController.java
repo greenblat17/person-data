@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/persons")
+@RequestMapping("/people")
 @RequiredArgsConstructor
 public class PersonController {
 
@@ -17,20 +17,27 @@ public class PersonController {
 
     @GetMapping("/search")
     public String search() {
-        return "persons/search";
+        return "people/search";
     }
 
     @GetMapping("/search/age")
     public String searchAgeByPersonName(@RequestParam("query") String queryName, Model model) {
         model.addAttribute("age", personService.getAgeByName(queryName));
 
-        return "persons/search";
+        return "people/search";
     }
 
     @GetMapping("/name-by-max-age")
     public String nameByMaxAge(Model model) {
         model.addAttribute("namesWithMaxAge", personService.getNameWithMaxAge());
 
-        return "persons/max-age";
+        return "people/max-age";
+    }
+
+    @GetMapping("/count")
+    public String getCountAllName(Model model) {
+        model.addAttribute("people", personService.getAllPerson());
+
+        return "people/count";
     }
 }
