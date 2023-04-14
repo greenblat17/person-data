@@ -17,7 +17,8 @@
     <h1 class="card1">Count By Person Name</h1>
 
     <div class="card2" th:each="person : ${people}">
-        <span th:text="${person.name + ' : ' + person.count}"></span>
+        <span th:if="${person.count == null}" th:text="${person.name + ' : ' + 0}"></span>
+        <span th:if="${person.count != null}" th:text="${person.name + ' : ' + person.count}"></span>
     </div>
 </div>
 <div class="bottompan">
