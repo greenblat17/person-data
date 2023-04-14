@@ -37,8 +37,8 @@ public class PersonService {
         return personByName.get().getAge();
     }
 
-    public List<String> getNamesWithMaxAge() {
-        return personRepository.findNamesWithMaxAge();
+    public List<Person> getNamesWithMaxAge() {
+        return personRepository.findPersonWithMaxAge();
     }
 
     private int getAgeForNotFoundName(String requestName) {

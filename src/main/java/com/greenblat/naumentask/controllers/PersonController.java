@@ -30,7 +30,7 @@ public class PersonController {
 
     @GetMapping("/statistics/name-by-max-age")
     public String nameByMaxAge(Model model) {
-        model.addAttribute("namesWithMaxAge", personService.getNamesWithMaxAge());
+        model.addAttribute("peopleWithMaxAge", personService.getNamesWithMaxAge());
 
         return "people/max-age";
     }

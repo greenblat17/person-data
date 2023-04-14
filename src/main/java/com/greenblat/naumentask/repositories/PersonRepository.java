@@ -15,12 +15,12 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM Person p WHERE p.name=:name ORDER BY p.id DESC LIMIT 1")
     Optional<Person> findPersonByName(@Param("name") String name);
 
-    @Query("SELECT p.name " +
+    @Query("SELECT p " +
             "FROM Person p " +
             "WHERE p.age= (" +
                 "SELECT MAX(p1.age) " +
                 "FROM Person p1 " +
             ")"
     )
-    List<String> findNamesWithMaxAge();
+    List<Person> findPersonWithMaxAge();
 }
