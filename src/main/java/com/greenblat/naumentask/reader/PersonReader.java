@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,15 @@ public class PersonReader implements Reader<Person> {
     @Value("${person.reader.file.path}")
     private String path;
 
+    @Value("${person.reader.file.name}")
+    private String fileName;
+
     @Override
     public List<Person> readFile() {
         List<Person> people = new ArrayList<>();
 
-        File file = new File(path + "info.txt");
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(file))) {
+        File file = new File(path + fileName);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] personInfo = line.split("_");
@@ -33,7 +37,6 @@ public class PersonReader implements Reader<Person> {
             throw new RuntimeException(e);
         }
 
-        System.out.println(people);
         return people;
     }
 

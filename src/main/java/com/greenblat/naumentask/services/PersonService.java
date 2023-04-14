@@ -4,6 +4,7 @@ import com.greenblat.naumentask.model.Person;
 import com.greenblat.naumentask.model.dto.RestPersonDto;
 import com.greenblat.naumentask.repositories.PersonRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +18,9 @@ public class PersonService {
 
     private final PersonRepository personRepository;
     private final RestTemplate restTemplate;
+
+    @Value("${api.agify.url}")
+    private String url;
 
     public List<Person> getAllPerson() {
         return personRepository.findAll();
@@ -38,8 +42,7 @@ public class PersonService {
     }
 
     private int getAgeForNotFoundName(String requestName) {
-        String url = "https://api.agify.io/?name=" + requestName;
-        RestPersonDto personDto = restTemplate.getForObject(url, RestPersonDto.class);
+        RestPersonDto personDto = restTemplate.getForObject(url + requestName, RestPersonDto.class);
         return Objects.requireNonNull(personDto).getAge();
     }
 
