@@ -16,6 +16,7 @@ public class PersonReader implements Reader<Person> {
     @Value("${person.reader.file.path}")
     private String path;
 
+    @Override
     public List<Person> readFile() {
         List<Person> people = new ArrayList<>();
 
