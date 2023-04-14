@@ -27,14 +27,14 @@ public class PersonController {
         return "people/search";
     }
 
-    @GetMapping("/name-by-max-age")
+    @GetMapping("/statistics/name-by-max-age")
     public String nameByMaxAge(Model model) {
         model.addAttribute("namesWithMaxAge", personService.getNameWithMaxAge());
 
         return "people/max-age";
     }
 
-    @GetMapping("/count")
+    @GetMapping("/statistics/count")
     public String getCountAllName(Model model) {
         model.addAttribute("people", personService.getAllPerson());
 
