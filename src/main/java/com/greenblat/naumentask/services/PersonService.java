@@ -22,7 +22,7 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public int getAgeByName(String name) {
+    public int getPersonByName(String name) {
         Optional<Person> personByName = personRepository.findPersonByName(name);
 
         if (personByName.isEmpty()) {
@@ -33,8 +33,8 @@ public class PersonService {
         return personByName.get().getAge();
     }
 
-    public List<String> getNameWithMaxAge() {
-        return personRepository.findNameWithMaxAge();
+    public List<String> getNamesWithMaxAge() {
+        return personRepository.findNamesWithMaxAge();
     }
 
     private int getAgeForNotFoundName(String requestName) {

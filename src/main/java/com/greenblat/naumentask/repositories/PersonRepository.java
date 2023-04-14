@@ -20,5 +20,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
                 "FROM Person p1 " +
             ")"
     )
-    List<String> findNameWithMaxAge();
+    List<String> findNamesWithMaxAge();
 }

@@ -22,14 +22,15 @@ public class PersonController {
 
     @GetMapping("/search/age")
     public String searchAgeByPersonName(@RequestParam("query") String queryName, Model model) {
-        model.addAttribute("age", personService.getAgeByName(queryName));
+        model.addAttribute("name", queryName);
+        model.addAttribute("age", personService.getPersonByName(queryName));
 
         return "people/search";
     }
 
     @GetMapping("/statistics/name-by-max-age")
     public String nameByMaxAge(Model model) {
-        model.addAttribute("namesWithMaxAge", personService.getNameWithMaxAge());
+        model.addAttribute("namesWithMaxAge", personService.getNamesWithMaxAge());
 
         return "people/max-age";
     }
