@@ -26,7 +26,7 @@ public class PersonService {
         Optional<Person> personByName = personRepository.findPersonByName(name);
 
         if (personByName.isEmpty()) {
-            return getAgeForNotFoundUser(name);
+            return getAgeForNotFoundName(name);
         }
 
         updateCountName(personByName.get());
@@ -37,7 +37,7 @@ public class PersonService {
         return personRepository.findNameWithMaxAge();
     }
 
-    private int getAgeForNotFoundUser(String requestName) {
+    private int getAgeForNotFoundName(String requestName) {
         String url = "https://api.agify.io/?name=" + requestName;
         RestPersonDto personDto = restTemplate.getForObject(url, RestPersonDto.class);
         return Objects.requireNonNull(personDto).getAge();
