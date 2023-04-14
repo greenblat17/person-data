@@ -9,15 +9,15 @@
 
 <div class="topnav">
     <a class="active" th:href="@{/people/search}">Get age by name</a>
-    <a th:href="@{/people/count}">Count name</a>
-    <a th:href="@{/people/name-by-max-age}">Max age</a>
+    <a th:href="@{/people/statistics/count}">Count name</a>
+    <a th:href="@{/people/statistics/name-by-max-age}">Max age</a>
 </div>
 
 <div class="main">
     <h1 class = "card1">Name with Max Age</h1>
 
     <div class="card2" th:each="name : ${namesWithMaxAge}">
-        <span th:text="${name}"></span>
+        <span th:text="${'Имя: ' + name}"></span>
     </div>
 </div>
 
