@@ -66,7 +66,19 @@ Start the server
   GET localhost:8080/statistics/name-by-max-age
 ```
 
+#### Get full stats by name
+
+```http
+  GET localhost:8080/statistics/full?name=${queryName}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `queryName` | `string` | **Required**. Name for statistics |
+
 
 ## Screenshots
 
 <img alt="Search Page" src="screenshots/search-page.png">
+<img alt="Max Age Page" src="screenshots/max-age-page.png">
+
