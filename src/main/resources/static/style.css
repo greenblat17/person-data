@@ -25,6 +25,15 @@ h1 {
     font-family: monospace;
 }
 
+#p1 {
+    text-align: justify;
+    align: center;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    right: 20px;
+}
+
 .card1 {
     background: -webkit-linear-gradient(45deg, rgb(99, 61, 54), rgb(130, 115, 85));
     position: absolute;
@@ -52,6 +61,49 @@ h1 {
     text-shadow: 0 0 5px #191616;
 }
 
+.card3 {
+    background: -webkit-linear-gradient(45deg, rgb(99, 61, 54), rgb(130, 115, 85));
+    width: 60%;
+    position: relative;
+    height: 95%;
+    margin: 2% auto;
+    border: 2px #3E332A solid;
+    border-radius: 20px;
+    background-color: #b35900;
+    color: white;
+    padding: 15% 30px;
+    text-align: justify;
+    text-shadow: 0 0 5px #191616;
+    bottom: 60px;
+}
+
+.btn-group button {
+    background-color: #edd3c0;
+    border-radius: 10px;
+    width: 20%;
+    height: 20%;
+    float: left;
+    text-align: center;
+    border: 1px solid;
+    left: 16.3%;
+    top: 140px;
+    position: relative;
+    padding: 10px 15px;
+    margin: 4px 4px auto;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+button:hover {
+    background-color: #6e4e46;
+}
 
 .topnav {
     overflow: hidden;
@@ -81,10 +133,10 @@ h1 {
     background-color: #f2e6d9;
     text-align: center;
     font-size: 10px;
-    width: 100%;
-    position: absolute;
-    margin: auto;
+    width:100%;
     bottom: 0;
+    position: fixed;
+    left: 0;
 }
 
 .main {
