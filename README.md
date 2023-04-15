@@ -80,6 +80,5 @@ Start the server
 ## Screenshots
 
 <img alt="Search Page" src="screenshots/search-page.png">
-<img alt="Count Page" src="screenshots/count-page.png">
 <img alt="Max Age Page" src="screenshots/max-age-page.png">
 
