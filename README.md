@@ -1,6 +1,10 @@
-# Test Task in NAUMEN
 
-### Создай web-приложение на Java, которое может:
+# Тестовое задание в компанию NAUMEN
+
+Сервис для считывания текстового файла и его анализа
+
+## Задание
+Создать web-приложение на Java, которое может:
 1. Считывать из текстового файла строки формата имя_возраст. Например: Андрей_27
 2. Предоставлять веб-интерфейс с полем ввода
    для произвольного имени. После отправки имени на сервер
@@ -9,12 +13,60 @@
    произвольное положительное целое число.
 3. Предоставлять возможность ведения просмотра
    статистики запросов по каждому имени:
-    - вывод частотности запросов в разрезе имён
-    - вывод имени с наибольшим возрастом
+   - вывод частотности запросов в разрезе имён
+   - вывод имени с наибольшим возрастом
+4. Приложение будет поддерживать работу с внешним
+   сервисом, который будет возвращать возраст произвольных
+   имен, если их нет в текстовом файле
+## Tech Stack
 
-### Пожелания к реализации
-- В качестве серверного фреймворка используешь Spring
-- В качестве интерфейсного фреймворка — Angular
-- Приложение будет поддерживать работу с внешним
-  сервисом, который будет возвращать возраст произвольных
-  имен, если их нет в текстовом файле
+**Client:** HTML, CSS, Thymeleaf
+
+**Server:** Spring Framework, H2
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/greenblat17/naumen-task.git
+```
+
+Go to the project directory
+
+```bash
+  cd naumen-task
+```
+
+Start the server
+
+```bash
+  mvn spring-boot:run
+```
+
+
+## API Reference
+
+#### Get the age of a person by name
+
+```http
+  GET localhost:8080/people/search
+```
+
+#### Get the frequency of requests in the context of names
+
+```http
+  GET localhost:8080/statistics/count
+```
+
+#### Get the name with the highest age
+
+```http
+  GET localhost:8080/statistics/name-by-max-age
+```
+
+
+## Screenshots
+
+<img alt="Search Page" src="screenshots/search-page.png">
