@@ -1,5 +1,6 @@
 package com.greenblat.naumentask.reader;
 
+import com.greenblat.naumentask.exception.PersonFileException;
 import com.greenblat.naumentask.model.Person;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -34,7 +35,7 @@ public class PersonReader implements Reader<Person> {
                 people.add(person);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new PersonFileException("File with this name " + fileName + " not found");
         }
 
         return people;
