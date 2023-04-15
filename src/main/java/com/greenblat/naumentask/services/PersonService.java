@@ -41,6 +41,10 @@ public class PersonService {
         return personRepository.findPersonWithMaxAge();
     }
 
+    public Integer getMaxAgeByName(String name) {
+        return personRepository.findPersonWithMaxAgeByName(name);
+    }
+
     private int getAgeForNotFoundName(String requestName) {
         RestPersonDto personDto = restTemplate.getForObject(url + requestName, RestPersonDto.class);
         return Objects.requireNonNull(personDto).getAge();

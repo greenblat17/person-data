@@ -17,8 +17,10 @@
     <h1 class="card1">Count By Person Name</h1>
 
     <div class="card2" th:each="statistics : ${fullStatistics}">
-        <span th:text="${statistics.person.name + '(' + statistics.person.age +') : ' + statistics.count}"></span>
+        <a th:href="@{'/statistics/full?name=' + ${statistics.person.name}}" th:text="${statistics.person.name}"/>
+        <span th:text="${'(' + statistics.person.age +') : ' + statistics.count}"></span>
     </div>
+
 </div>
 <div class="bottompan">
     <p> Copyright 2023</p>

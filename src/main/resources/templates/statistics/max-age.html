@@ -17,9 +17,7 @@
     <h1 class = "card1">Name with Max Age</h1>
 
     <div class="card2" th:each="person : ${peopleWithMaxAge}">
-        <span th:text="${'Имя: ' + person.name}"></span>
-        <br>
-        <span th:text="${'Вoзраст: ' + person.age}"></span>
+        <span th:text="${person.name + ' : ' + person.age}"></span>
     </div>
 </div>
 

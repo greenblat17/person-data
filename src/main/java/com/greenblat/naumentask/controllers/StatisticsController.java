@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/statistics")
@@ -24,10 +26,18 @@ public class StatisticsController {
     }
 
     @GetMapping("/count")
-    public String getCountAllName(Model model) {
+    public String countAllName(Model model) {
         model.addAttribute("fullStatistics", statisticsService.getStatisticsPeople());
-
         return "statistics/count";
+    }
+
+    @GetMapping("/full")
+    public String fullStatisticsByName(@RequestParam("name") String name,
+                                       Model model) {
+        model.addAttribute("name", name);
+        model.addAttribute("personFullStatistics", statisticsService.getFullStatisticsByName(name));
+
+        return "statistics/stats-by-name";
     }
 
 }
