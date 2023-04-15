@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -24,6 +23,9 @@ public class PersonService {
 
     @Value("${api.agify.url}")
     private String url;
+
+    @Value("${person.age.default_value}")
+    private int defaultAge;
 
     public int getPersonsAgeByName(String name) {
         Optional<Person> personByName = personRepository.findPersonByName(name);
@@ -47,7 +49,7 @@ public class PersonService {
 
     private int getAgeForNotFoundName(String requestName) {
         RestPersonDto personDto = restTemplate.getForObject(url + requestName, RestPersonDto.class);
-        return Objects.requireNonNull(personDto).getAge();
+        return personDto != null ? personDto.getAge() : defaultAge;
     }
 
     private void updateCountName(Person person) {
