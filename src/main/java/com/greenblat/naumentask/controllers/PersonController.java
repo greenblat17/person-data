@@ -23,7 +23,7 @@ public class PersonController {
     @GetMapping("/search/age")
     public String searchAgeByPersonName(@RequestParam("query") String queryName, Model model) {
         model.addAttribute("name", queryName);
-        model.addAttribute("age", personService.getPersonsAgeByName(queryName));
+        model.addAttribute("age", personService.getPersonsAgeByName(queryName.toLowerCase()));
 
         return "people/search";
     }

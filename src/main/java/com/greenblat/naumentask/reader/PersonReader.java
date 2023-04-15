@@ -43,7 +43,7 @@ public class PersonReader implements Reader<Person> {
 
     private Person getPerson(String[] personInfo) {
         return Person.builder()
-                .name(personInfo[0])
+                .name(personInfo[0].toLowerCase())
                 .age(Integer.parseInt(personInfo[1]))
                 .build();
     }

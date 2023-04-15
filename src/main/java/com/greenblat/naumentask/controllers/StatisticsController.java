@@ -35,7 +35,7 @@ public class StatisticsController {
     public String fullStatisticsByName(@RequestParam("name") String name,
                                        Model model) {
         model.addAttribute("name", name);
-        model.addAttribute("personFullStatistics", statisticsService.getFullStatisticsByName(name));
+        model.addAttribute("personFullStatistics", statisticsService.getFullStatisticsByName(name.toLowerCase()));
 
         return "statistics/stats-by-name";
     }
