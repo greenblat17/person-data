@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="../../static/style.css">
+    <meta charset="UTF-8">
+    <title>Count</title>
+</head>
+<body>
+
+<div class="topnav">
+    <a th:href="@{/people/search}">Get age by name</a>
+    <a class="active" th:href="@{/statistics/count}">Count name</a>
+    <a th:href="@{/statistics/name-by-max-age}">Max age</a>
+</div>
+
+<div class="main">
+    <h1 class="card1">Count By Person Name</h1>
+
+    <div class="card2" th:each="statistics : ${fullStatistics}">
+        <span th:text="${statistics.person.name + '(' + statistics.person.age +') : ' + statistics.count}"></span>
+    </div>
+</div>
+<div class="bottompan">
+    <p> Copyright 2023</p>
+</div>
+
+</body>
+</html>

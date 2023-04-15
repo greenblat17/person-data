@@ -11,8 +11,8 @@
 
 <div class="topnav">
     <a class="active" th:href="@{/people/search}">Get age by name</a>
-    <a th:href="@{/people/statistics/count}">Count name</a>
-    <a th:href="@{/people/statistics/name-by-max-age}">Max age</a>
+    <a th:href="@{/statistics/count}">Count name</a>
+    <a th:href="@{/statistics/name-by-max-age}">Max age</a>
 </div>
 
 <div class="main">
@@ -25,14 +25,14 @@
             <input type="submit" value="Искать">
         </form>
 
-        <div>
+        <div th:if="${age != null && name != null}">
             <span class="CardAge" th:text="${'Возраст: ' + age}"/>
             <span class="CardAge" th:text="${'Имя: ' + name}"/>
         </div>
+
     </div>
     <br>
 </div>
-
 
 <div class="bottompan">
     <p> Copyright 2023</p>

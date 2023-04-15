@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="../../static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <meta charset="UTF-8">
     <title>Max Age</title>
 </head>
 <body>
 
 <div class="topnav">
-    <a class="active" th:href="@{/people/search}">Get age by name</a>
-    <a th:href="@{/people/statistics/count}">Count name</a>
-    <a th:href="@{/people/statistics/name-by-max-age}">Max age</a>
+    <a  th:href="@{/people/search}">Get age by name</a>
+    <a th:href="@{/statistics/count}">Count name</a>
+    <a  class="active" th:href="@{/statistics/name-by-max-age}">Max age</a>
 </div>
 
 <div class="main">
