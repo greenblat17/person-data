@@ -25,6 +25,10 @@ h1 {
     font-family: monospace;
 }
 
+a {
+    color: blanchedalmond;
+}
+
 #p1 {
     text-align: justify;
     align: center;
