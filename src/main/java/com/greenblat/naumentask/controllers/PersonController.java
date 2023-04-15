@@ -23,22 +23,9 @@ public class PersonController {
     @GetMapping("/search/age")
     public String searchAgeByPersonName(@RequestParam("query") String queryName, Model model) {
         model.addAttribute("name", queryName);
-        model.addAttribute("age", personService.getPersonByName(queryName));
+        model.addAttribute("age", personService.getPersonsAgeByName(queryName));
 
         return "people/search";
     }
 
-    @GetMapping("/statistics/name-by-max-age")
-    public String nameByMaxAge(Model model) {
-        model.addAttribute("peopleWithMaxAge", personService.getNamesWithMaxAge());
-
-        return "people/max-age";
-    }
-
-    @GetMapping("/statistics/count")
-    public String getCountAllName(Model model) {
-        model.addAttribute("people", personService.getAllPerson());
-
-        return "people/count";
-    }
 }
