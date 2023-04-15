@@ -6,27 +6,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Builder
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "person")
-public class Person {
+@Table(name = "statistics")
+public class Statistics implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "count")
+    private long count;
 
-    @Column(name = "age")
-    private Integer age;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "statistics_id", referencedColumnName = "id")
-    private Statistics statistics;
+    @OneToOne(mappedBy = "statistics")
+    private Person person;
 
 }
