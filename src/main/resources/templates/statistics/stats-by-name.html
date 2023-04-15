@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8">
+  <title>Max Age</title>
+</head>
+<body>
+
+<div class="topnav">
+  <a  th:href="@{/people/search}">Get age by name</a>
+  <a th:href="@{/statistics/count}">Count name</a>
+  <a  th:href="@{/statistics/name-by-max-age}">Max age</a>
+</div>
+
+<div class="main">
+  <h1 class = "card1" th:text="${'Full Statistics by ' + name}"></h1>
+
+  <div class="card2">
+    <span th:text="${'Максимальный возраст: ' + personFullStatistics.age}"></span>
+  </div>
+  <div class="card2">
+    <span th:text="${'Общее число запросов: ' + personFullStatistics.count}"></span>
+  </div>
+</div>
+
+</body>
+</html>
