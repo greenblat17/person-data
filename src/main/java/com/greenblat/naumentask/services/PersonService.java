@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -32,7 +31,14 @@ public class PersonService {
         Optional<Person> personByName = personRepository.findPersonByName(name);
 
         if (personByName.isEmpty()) {
-            return getAgeForNotFoundName(name);
+            RestPersonDto personDto = getPersonWithNotFoundName(name);
+            if (personDto.getAge() == 0) {
+                personDto.setAge(defaultAge);
+                personDto.setCount(1);
+            }
+            savePerson(personDto);
+
+            return personDto.getAge();
         }
 
         updateCountName(personByName.get());
@@ -48,16 +54,30 @@ public class PersonService {
         return personRepository.findPersonWithMaxAgeByName(name);
     }
 
-    private int getAgeForNotFoundName(String requestName) {
-        RestPersonDto personDto = restTemplate.getForObject(url + requestName, RestPersonDto.class);
-        int age = Objects.requireNonNull(personDto).getAge();
-        return age == 0 ? defaultAge : age;
+    private RestPersonDto getPersonWithNotFoundName(String requestName) {
+        return restTemplate.getForObject(url + requestName, RestPersonDto.class);
     }
 
     private void updateCountName(Person person) {
         Statistics statistics = person.getStatistics();
         long curCount = statistics.getCount();
         statistics.setCount(curCount + 1);
+        statisticsRepository.save(statistics);
+    }
+    private void savePerson(RestPersonDto personDto) {
+        Person person = Person.builder()
+                .age(personDto.getAge())
+                .name(personDto.getName().toLowerCase())
+                .build();
+        Statistics statistics = Statistics
+                .builder()
+                .count(personDto.getCount())
+                .person(person)
+                .build();
+
+        person.setStatistics(statistics);
+
+        personRepository.save(person);
         statisticsRepository.save(statistics);
     }
 }
