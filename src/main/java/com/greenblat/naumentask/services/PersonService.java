@@ -27,14 +27,20 @@ public class PersonService {
     @Value("${person.age.default_value}")
     private int defaultAge;
 
+    @Value("${person.age.not_found_value}")
+    private int notFoundAge;
+
+    @Value("${person.count.start_value}")
+    private int startCount;
+
     public int getPersonsAgeByName(String name) {
         Optional<Person> personByName = personRepository.findPersonByName(name);
 
         if (personByName.isEmpty()) {
             RestPersonDto personDto = getPersonWithNotFoundName(name);
-            if (personDto.getAge() == 0) {
+            if (personDto.getAge() == notFoundAge) {
                 personDto.setAge(defaultAge);
-                personDto.setCount(1);
+                personDto.setCount(startCount);
             }
             savePerson(personDto);
 
@@ -69,12 +75,12 @@ public class PersonService {
                 .age(personDto.getAge())
                 .name(personDto.getName().toLowerCase())
                 .build();
+
         Statistics statistics = Statistics
                 .builder()
                 .count(personDto.getCount())
                 .person(person)
                 .build();
-
         person.setStatistics(statistics);
 
         personRepository.save(person);
