@@ -53,11 +53,11 @@ public class PersonService {
 
 
     public List<Person> getNamesWithMaxAge() {
-        return personRepository.findPersonWithMaxAge();
+        return personRepository.findPeopleWithMaxAge();
     }
 
     public Integer getMaxAgeByName(String name) {
-        return personRepository.findPersonWithMaxAgeByName(name);
+        return personRepository.findPersonsAgeWithMaxAgeByName(name);
     }
 
     private RestPersonDto getPersonWithNotFoundName(String requestName) {

@@ -22,7 +22,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
                 "FROM Person p1 " +
             ")"
     )
-    List<Person> findPersonWithMaxAge();
+    List<Person> findPeopleWithMaxAge();
 
     @Query("SELECT p.age " +
             "FROM Person p " +
@@ -32,5 +32,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             "WHERE p1.name=:name" +
             ")"
     )
-    Integer findPersonWithMaxAgeByName(@Param("name") String name);
+    Integer findPersonsAgeWithMaxAgeByName(@Param("name") String name);
 }
