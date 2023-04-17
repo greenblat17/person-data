@@ -22,7 +22,7 @@
 
 **Client:** HTML, CSS, Thymeleaf
 
-**Server:** Spring Framework, H2
+**Server:** Java, Spring Framework, H2 DB
 
 
 ## Run Locally
