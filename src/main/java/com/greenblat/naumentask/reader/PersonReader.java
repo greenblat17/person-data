@@ -34,8 +34,12 @@ public class PersonReader implements Reader<Person> {
 
                 people.add(person);
             }
-        } catch (IOException e) {
-            throw new PersonFileException("File with this name " + fileName + " not found");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ArrayIndexOutOfBoundsException("The data in the file is in the wrong format");
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Age is in the wrong format");
+        }  catch (IOException e) {
+            throw new PersonFileException(String.format("File with name %s not found", path + fileName));
         }
 
         return people;
