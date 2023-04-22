@@ -72,10 +72,7 @@ public class PersonService {
     }
 
     private void savePerson(RestPersonDto personDto) {
-        Person person = Person.builder()
-                .age(personDto.getAge())
-                .name(personDto.getName())
-                .build();
+        Person person = restPersonDtoMapToPerson(personDto);
 
         Statistics statistics = Statistics
                 .builder()
@@ -86,5 +83,12 @@ public class PersonService {
         person.setStatistics(statistics);
 
         personRepository.save(person);
+    }
+
+    private Person restPersonDtoMapToPerson(RestPersonDto restPersonDto) {
+        return Person.builder()
+                .age(restPersonDto.getAge())
+                .name(restPersonDto.getName())
+                .build();
     }
 }
