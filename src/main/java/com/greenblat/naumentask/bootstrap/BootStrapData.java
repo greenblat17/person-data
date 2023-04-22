@@ -26,7 +26,6 @@ public class BootStrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
         List<Person> people = personReader.readFile();
         for (Person person : people) {
-
             Optional<Person> optionalPerson = personRepository.findPersonByNameAndAge(person.getName(), person.getAge());
             if (optionalPerson.isEmpty()) {
                 Statistics statistics = Statistics.builder()

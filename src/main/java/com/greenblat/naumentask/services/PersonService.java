@@ -70,10 +70,11 @@ public class PersonService {
         statistics.setCount(curCount + 1);
         statisticsRepository.save(statistics);
     }
+
     private void savePerson(RestPersonDto personDto) {
         Person person = Person.builder()
                 .age(personDto.getAge())
-                .name(personDto.getName().toLowerCase())
+                .name(personDto.getName())
                 .build();
 
         Statistics statistics = Statistics
@@ -81,9 +82,9 @@ public class PersonService {
                 .count(personDto.getCount())
                 .person(person)
                 .build();
+
         person.setStatistics(statistics);
 
         personRepository.save(person);
-        statisticsRepository.save(statistics);
     }
 }
