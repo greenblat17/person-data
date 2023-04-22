@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
+    Optional<Person> findPersonByNameAndAge(String name, int age);
+
     @Query(nativeQuery = true, value = "SELECT * FROM Person p WHERE p.name=:name ORDER BY p.id DESC LIMIT 1")
     Optional<Person> findPersonByName(@Param("name") String name);
 
