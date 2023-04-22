@@ -4,6 +4,7 @@ import com.greenblat.naumentask.model.Person;
 import com.greenblat.naumentask.model.Statistics;
 import com.greenblat.naumentask.reader.PersonReader;
 import com.greenblat.naumentask.repositories.PersonRepository;
+import com.greenblat.naumentask.repositories.StatisticsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class BootStrapData implements CommandLineRunner {
 
     private final PersonRepository personRepository;
+    private final StatisticsRepository statisticsRepository;
     private final PersonReader personReader;
 
     @Value("${person.count.default_value}")
@@ -28,15 +30,18 @@ public class BootStrapData implements CommandLineRunner {
         for (Person person : people) {
             Optional<Person> optionalPerson = personRepository.findPersonByNameAndAge(person.getName(), person.getAge());
             if (optionalPerson.isEmpty()) {
-                Statistics statistics = Statistics.builder()
-                        .count(defaultCount)
-                        .person(person)
-                        .build();
-                person.setStatistics(statistics);
-
+                Statistics statistics = getStatistics(person);
+                statisticsRepository.save(statistics);
                 personRepository.save(person);
             }
         }
 
+    }
+
+    private Statistics getStatistics(Person person) {
+        return Statistics.builder()
+                .count(defaultCount)
+                .person(person)
+                .build();
     }
 }
