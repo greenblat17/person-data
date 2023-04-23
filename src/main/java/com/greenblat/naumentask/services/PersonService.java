@@ -8,12 +8,14 @@ import com.greenblat.naumentask.repositories.StatisticsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor()
 public class PersonService {
 
@@ -33,6 +35,7 @@ public class PersonService {
     @Value("${person.count.start_value}")
     private int startCount;
 
+    @Transactional
     public int getPersonsAgeByName(String name) {
         Optional<Person> personByName = personRepository.findPersonByName(name);
 

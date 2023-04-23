@@ -6,9 +6,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Repository
 public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
@@ -17,7 +14,6 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
     Integer findCountByPerson_Name(String name);
 
     @Modifying
-    @Transactional
     @Query(nativeQuery = true,
             value = "UPDATE Statistics  s" +
                     " SET s.count = s.count + 1" +
