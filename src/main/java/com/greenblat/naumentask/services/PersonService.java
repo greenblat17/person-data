@@ -22,25 +22,25 @@ public class PersonService {
     private final RestTemplate restTemplate;
 
     @Value("${api.agify.url}")
-    private String url;
+    private final String URL;
 
     @Value("${person.age.default_value}")
-    private int defaultAge;
+    private final int DEFAULT_AGE;
 
     @Value("${person.age.not_found_value}")
-    private int notFoundAge;
+    private final int NOT_FOUND_AGE;
 
     @Value("${person.count.start_value}")
-    private int startCount;
+    private final int START_COUNT;
 
     public int getPersonsAgeByName(String name) {
         Optional<Person> personByName = personRepository.findPersonByName(name);
 
         if (personByName.isEmpty()) {
             RestPersonDto personDto = getPersonWithNotFoundName(name);
-            if (personDto.getAge() == notFoundAge) {
-                personDto.setAge(defaultAge);
-                personDto.setCount(startCount);
+            if (personDto.getAge() == NOT_FOUND_AGE) {
+                personDto.setAge(DEFAULT_AGE);
+                personDto.setCount(START_COUNT);
             }
             savePerson(personDto);
 
@@ -61,7 +61,7 @@ public class PersonService {
     }
 
     private RestPersonDto getPersonWithNotFoundName(String requestName) {
-        return restTemplate.getForObject(url + requestName, RestPersonDto.class);
+        return restTemplate.getForObject(URL + requestName, RestPersonDto.class);
     }
 
     private void updateCountName(Person person) {
