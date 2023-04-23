@@ -21,7 +21,7 @@ public class Statistics implements Serializable {
     private Long id;
 
     @Column(name = "count")
-    private long count;
+    private Integer count;
 
     @OneToOne(mappedBy = "statistics")
     private Person person;

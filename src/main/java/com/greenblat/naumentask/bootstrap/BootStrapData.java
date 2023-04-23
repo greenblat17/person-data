@@ -20,7 +20,7 @@ public class BootStrapData implements CommandLineRunner {
     private final PersonReader personReader;
 
     @Value("${person.count.default_value}")
-    private final int DEFAULT_COUNT;
+    private int defaultCount;
 
     @Override
     public void run(String... args) throws Exception {
@@ -38,7 +38,7 @@ public class BootStrapData implements CommandLineRunner {
 
     private Statistics getStatistics(Person person) {
         return Statistics.builder()
-                .count(DEFAULT_COUNT)
+                .count(defaultCount)
                 .person(person)
                 .build();
     }

@@ -30,10 +30,10 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("SELECT p.age " +
             "FROM Person p " +
             "WHERE p.age= (" +
-            "SELECT MAX(p1.age) " +
-            "FROM Person p1 " +
-            "WHERE UPPER(p1.name)=UPPER(:name)" +
+                "SELECT MAX(p1.age) " +
+                "FROM Person p1 " +
+                "WHERE UPPER(p1.name)=UPPER(:name)" +
             ")"
     )
-    Integer findPersonsAgeWithMaxAgeByName(@Param("name") String name);
+    Integer findMaxAgeByName(@Param("name") String name);
 }

@@ -14,7 +14,7 @@
 </div>
 
 <div class="main">
-  <h1 class = "card1" th:text="${'Full Statistics by ' + name}"></h1>
+  <h1 class = "card1" th:text="${'Full Statistics by ' + name.toUpperCase()}"></h1>
 
   <div class="card2">
     <span th:text="${'Максимальный возраст: ' + personFullStatistics.age}"></span>

@@ -87,7 +87,7 @@ class PersonRepositoryTest {
         underTest.save(personWithMaxAge);
 
         // Then
-        Integer maxAgeByName = underTest.findPersonsAgeWithMaxAgeByName(nameWithMaxAge);
+        Integer maxAgeByName = underTest.findMaxAgeByName(nameWithMaxAge);
         assertThat(maxAgeByName).isEqualTo(maxAge);
     }
 }
