@@ -26,13 +26,13 @@ public class PersonService {
     @Value("${api.agify.url}")
     private String url;
 
-    @Value("${person.age.default_value}")
+    @Value("${person.age.default-value}")
     private  int defaultAge;
 
-    @Value("${person.age.not_found_value}")
+    @Value("${person.age.not-found-value}")
     private  int notFoundAge;
 
-    @Value("${person.count.start_value}")
+    @Value("${person.count.start-value}")
     private int startCount;
 
     @Transactional

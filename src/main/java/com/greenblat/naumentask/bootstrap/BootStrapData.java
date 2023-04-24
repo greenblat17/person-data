@@ -19,7 +19,7 @@ public class BootStrapData implements CommandLineRunner {
     private final PersonRepository personRepository;
     private final PersonReader personReader;
 
-    @Value("${person.count.default_value}")
+    @Value("${person.count.default-value}")
     private int defaultCount;
 
     @Override
