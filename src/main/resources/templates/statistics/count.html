@@ -13,6 +13,7 @@
     <a th:href="@{/statistics/name-by-max-age}">Max age</a>
 </div>
 
+
 <div class="main">
     <h1 class="card1">Count By Person Name</h1>
 
@@ -21,7 +22,13 @@
         <span th:text="${'(' + statistics.person.age +') : ' + statistics.count}"></span>
     </div>
 
+    <a th:if="${prevPage >= 0}" th:href="@{'/statistics/count?page=' + ${prevPage}}" th:text="Назад"/>
+    <a th:if="${nextPage * 5 < size}" th:href="@{'/statistics/count?page=' + ${nextPage}}" th:text="Вперед"/>
+
+    <!--    <a class="pageRef"> Назад</a>-->
+    <!--    <a class="pageRef">Вперед</a>-->
 </div>
+
 <div class="bottompan">
     <p> Copyright 2023</p>
 </div>

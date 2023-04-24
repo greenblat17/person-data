@@ -26,8 +26,11 @@ public class StatisticsController {
     }
 
     @GetMapping("/count")
-    public String countAllName(Model model) {
-        model.addAttribute("fullStatistics", statisticsService.getStatisticsPeople());
+    public String countAllName(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model) {
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("nextPage", page + 1);
+        model.addAttribute("size", statisticsService.getCountStatisticsInDb());
+        model.addAttribute("fullStatistics", statisticsService.getStatisticsPeople(page));
         return "statistics/count";
     }
 

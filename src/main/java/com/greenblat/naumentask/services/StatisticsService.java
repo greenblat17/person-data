@@ -5,10 +5,11 @@ import com.greenblat.naumentask.model.dto.ResponseStatisticsDto;
 import com.greenblat.naumentask.repositories.PersonRepository;
 import com.greenblat.naumentask.repositories.StatisticsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -18,8 +19,15 @@ public class StatisticsService {
     private final StatisticsRepository statisticsRepository;
     private final PersonRepository personRepository;
 
-    public List<Statistics> getStatisticsPeople() {
-        return statisticsRepository.findAll();
+    @Value("${spring.data.web.pageable.default-page-size}")
+    private int pageSize;
+
+    public Long getCountStatisticsInDb() {
+        return statisticsRepository.count();
+    }
+
+    public Page<Statistics> getStatisticsPeople(Integer page) {
+        return statisticsRepository.findAll(PageRequest.of(page, pageSize));
     }
 
     public ResponseStatisticsDto getFullStatisticsByName(String name) {
