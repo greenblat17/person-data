@@ -1,7 +1,6 @@
 package com.greenblat.naumentask.services;
 
 import com.greenblat.naumentask.model.Person;
-import com.greenblat.naumentask.model.Statistics;
 import com.greenblat.naumentask.repositories.PersonRepository;
 import com.greenblat.naumentask.repositories.StatisticsRepository;
 import org.junit.jupiter.api.Test;
@@ -50,16 +49,10 @@ class PersonServiceTest {
     @Test
     void itShouldGetNamesWithMaxAge() {
         // Given
-        int minAge = 10;
-        int middleAge = 20;
-        int maxAge = 30;
+        int maxAge = 100;
 
-        Person personWithMinAge = getPerson("Alex", minAge);
-        Person personWithMiddleAge = getPerson("Tim", middleAge);
         Person personWithMaxAge1 = getPerson("Gary", maxAge);
         Person personWithMaxAge2 = getPerson("Roy", maxAge);
-
-        personRepository.saveAll(List.of(personWithMinAge, personWithMiddleAge, personWithMaxAge1, personWithMaxAge2));
 
         List<Person> peopleWithMaxAge = List.of(personWithMaxAge1, personWithMaxAge2);
         doReturn(peopleWithMaxAge).when(personRepository).findPeopleWithMaxAge();
@@ -72,7 +65,7 @@ class PersonServiceTest {
         assertThat(actualResult).isEqualTo(peopleWithMaxAge);
     }
 
-    private static Person getPerson(String name, int age) {
+    private Person getPerson(String name, int age) {
         return Person.builder()
                 .name(name)
                 .age(age)
