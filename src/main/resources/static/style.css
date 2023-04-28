@@ -1,11 +1,13 @@
-html{
+html {
     height: 100%;
     overflow: hidden;
     margin: 0;
 }
+
 body {
     background: -webkit-linear-gradient(90deg, #EDDEBB, #998662);
-    background-image: linear-gradient(0deg, rgba(103, 58, 42, 0.6671043417366946) 0%, rgba(208, 190, 107, 0.40379901960784315) 100%), url("img/more-leaves.png");
+    background-image: linear-gradient(0deg, rgba(103, 58, 42,
+    0.6671043417366946) 0%, rgba(208, 190, 107, 0.40379901960784315) 100%), url("img/more-leaves.png");
     height: 100%;
     background-repeat: repeat;
     margin: 0;
@@ -72,6 +74,20 @@ a {
     background-color: #b35900;
     color: white;
     padding: 10px;
+    text-align: center;
+    text-shadow: 0 0 5px #191616;
+    bottom: 50%;
+}
+
+.card21 {
+    background: -webkit-linear-gradient(45deg, rgb(99, 61, 54), rgb(130, 115, 85));
+    width: 40%;
+    margin: 2% auto;
+    border: 2px #3E332A solid;
+    border-radius: 20px;
+    background-color: #b35900;
+    color: white;
+    padding: 1%;
     text-align: center;
     text-shadow: 0 0 5px #191616;
     bottom: 50%;
@@ -185,4 +201,14 @@ input[type=text], select {
     text-align: center;
     color: black;
     text-shadow: none;
+}
+
+.pageRef {
+    position: absolute;
+    bottom: 4%;
+    left: 1%;
+}
+
+#forw {
+    left: 5%;
 }

@@ -22,11 +22,9 @@
         <span th:text="${'(' + statistics.person.age +') : ' + statistics.count}"></span>
     </div>
 
-    <a th:if="${prevPage >= 0}" th:href="@{'/statistics/count?page=' + ${prevPage}}" th:text="Назад"/>
-    <a th:if="${nextPage * 5 < size}" th:href="@{'/statistics/count?page=' + ${nextPage}}" th:text="Вперед"/>
+    <a class="pageRef" th:if="${prevPage >= 0}" th:href="@{'/statistics/count?page=' + ${prevPage}}" th:text="Back"/>
+    <a id="forw" class="pageRef" th:if="${nextPage * 5 < size}" th:href="@{'/statistics/count?page=' + ${nextPage}}" th:text="Forward"/>
 
-    <!--    <a class="pageRef"> Назад</a>-->
-    <!--    <a class="pageRef">Вперед</a>-->
 </div>
 
 <div class="bottompan">
