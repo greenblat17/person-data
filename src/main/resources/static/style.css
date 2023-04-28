@@ -1,9 +1,3 @@
-html {
-    height: 100%;
-    overflow: hidden;
-    margin: 0;
-}
-
 body {
     background: -webkit-linear-gradient(90deg, #EDDEBB, #998662);
     background-image: linear-gradient(0deg, rgba(103, 58, 42,
@@ -205,10 +199,12 @@ input[type=text], select {
 
 .pageRef {
     position: absolute;
-    bottom: 4%;
-    left: 1%;
+    top: 93%;
+    left: 45%;
+    font-size: 20px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 #forw {
-    left: 5%;
+    left: 50%;
 }
