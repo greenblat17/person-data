@@ -39,7 +39,6 @@ public class PersonService {
     @Transactional
     public int getPersonsAgeByName(String name) {
         if (name == null || name.isBlank()) {
-            System.out.println("Excepttion");
             throw new EmptyFormException("name is empty");
         }
 
