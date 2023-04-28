@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css"/>
+
+    <title>Exception</title>
+</head>
+<body>
+
+<div class="topnav">
+    <a th:href="@{/people/search}">Get age by name</a>
+    <a th:href="@{/statistics/count}">Count name</a>
+    <a th:href="@{/statistics/name-by-max-age}">Max age</a>
+</div>
+
+<div class="main">
+    <div class="card2">
+        <h1> Error 400 </h1>
+        <p th:text="${'Error: ' + exception.httpStatus()}"></p>
+        <p th:text="${'Message: ' + exception.message()}"/>
+        <p th:text="${'Time: ' + exception.localDateTime()}"></p>
+
+    </div>
+    <br>
+</div>
+
+<div class="bottompan">
+    <p> Copyright 2023</p>
+</div>
+
+</body>
+</html>
