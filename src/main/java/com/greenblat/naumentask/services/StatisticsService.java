@@ -33,9 +33,6 @@ public class StatisticsService {
     public ResponseStatisticsDto getFullStatisticsByName(String name) {
         Integer count = statisticsRepository.findCountByPerson_Name(name);
         Integer maxAge = personRepository.findMaxAgeByName(name);
-        return ResponseStatisticsDto.builder()
-                .count(count)
-                .age(maxAge)
-                .build();
+        return new ResponseStatisticsDto(count, maxAge);
     }
 }
