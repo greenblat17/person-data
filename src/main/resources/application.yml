@@ -1,9 +1,9 @@
 # DATABASE
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/naumen
-    username: postgres
-    password: 1412
+    url: jdbc:${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

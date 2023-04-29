@@ -25,6 +25,17 @@
 **Server:** Java, Spring Framework, Hibernate, PostgreSQL, H2 DB
 
 
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`DB_URL=url`
+
+`DB_USERNAME=username`
+
+`DB_PASSWORD=password`
+
+
 ## Run Locally
 
 Clone the project
@@ -37,6 +48,15 @@ Go to the project directory
 
 ```bash
   cd naumen-task
+```
+
+Set environment variables
+
+```bash
+  export \
+  DB_URL=postgresql://host:port/database \
+  DB_USERNAME=username \
+  DB_PASSWORD=password \
 ```
 
 Start the server
