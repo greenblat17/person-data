@@ -10,14 +10,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
 
-    @Query("SELECT s.count FROM Statistics s WHERE UPPER(s.person.name) = UPPER(:name) GROUP BY UPPER(:name)")
+    @Query("SELECT s.count " +
+            "FROM Statistics s" +
+            " WHERE UPPER(s.person.name) = UPPER(:name)" +
+            " GROUP BY UPPER(:name), s.count")
     Integer findCountByPerson_Name(String name);
 
     @Modifying
     @Query(nativeQuery = true,
-            value = "UPDATE Statistics  s" +
-                    " SET s.count = s.count + 1" +
-                    " WHERE exists (SELECT * FROM Person p WHERE UPPER(p.name) = UPPER(:name) AND p.statistics_id =s .id)")
+            value = "UPDATE statistics  s" +
+                    " SET count = s.count + 1" +
+                    " WHERE exists (SELECT * FROM person p WHERE UPPER(p.name) = UPPER(:name) AND p.statistics_id =s .id)")
     void updateCountByName(@Param("name") String name);
 
 }
