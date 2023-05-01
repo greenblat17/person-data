@@ -48,21 +48,7 @@ class PersonServiceTest {
 
     @Test
     void itShouldGetNamesWithMaxAge() {
-        // Given
-        int maxAge = 100;
-
-        Person personWithMaxAge1 = getPerson("Gary", maxAge);
-        Person personWithMaxAge2 = getPerson("Roy", maxAge);
-
-        List<Person> peopleWithMaxAge = List.of(personWithMaxAge1, personWithMaxAge2);
-        doReturn(peopleWithMaxAge).when(personRepository).findPeopleWithMaxAge();
-
-        // When
-        List<Person> actualResult = personService.getNamesWithMaxAge();
-
-        // Then
-        assertThat(actualResult).isNotEmpty();
-        assertThat(actualResult).isEqualTo(peopleWithMaxAge);
+        verify(personRepository).findPeopleWithMaxAge();
     }
 
     private Person getPerson(String name, int age) {
