@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Reader<T> {
 
-    List<T> readFile();
+    List<T> readFile(String fileName);
 }

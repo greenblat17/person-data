@@ -19,12 +19,18 @@ public class BootStrapData implements CommandLineRunner {
     private final PersonRepository personRepository;
     private final PersonReader personReader;
 
+    @Value("${person.reader.file.path}")
+    private String path;
+
+    @Value("${person.reader.file.name}")
+    private String fileName;
+
     @Value("${person.count.default-value}")
     private int defaultCount;
 
     @Override
     public void run(String... args) throws Exception {
-        List<Person> people = personReader.readFile();
+        List<Person> people = personReader.readFile(path + fileName);
         for (Person person : people) {
             Optional<Person> optionalPerson = personRepository.findPersonByNameAndAge(person.getName(), person.getAge());
             if (optionalPerson.isEmpty()) {
