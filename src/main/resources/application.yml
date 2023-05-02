@@ -31,7 +31,7 @@ api:
 person:
   reader:
     file:
-      name: info.txt
+      name: names.txt
       path: src/main/resources/
   count:
     default-value: 0
