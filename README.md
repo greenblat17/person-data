@@ -77,8 +77,12 @@ Start the server
 #### Get the frequency of requests in the context of names
 
 ```http
-  GET localhost:8080/statistics/count
+  GET localhost:8080/statistics/count?page=${pageNumber}
 ```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `pageNumber` | `int` | **Required**. **Default Value = 0**. page number with names |
 
 #### Get the name with the highest age
 
