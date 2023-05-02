@@ -42,8 +42,6 @@ public class PersonService {
             throw new EmptyFormException("name is empty");
         }
 
-        name = name.strip();
-
         Optional<Person> personByName = personRepository.findPersonByName(name);
 
         if (personByName.isEmpty()) {
