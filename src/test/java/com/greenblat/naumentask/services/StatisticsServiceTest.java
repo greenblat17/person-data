@@ -11,8 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class StatisticsServiceTest {
@@ -40,8 +40,10 @@ class StatisticsServiceTest {
         ResponseStatisticsDto actualResult = statisticsService.getFullStatisticsByName(name);
 
         // Then
-        ResponseStatisticsDto expectedResult = getStatisticsDto(count, maxAge);
+        verify(statisticsRepository).findCountByPerson_Name(name);
+        verify(personRepository).findMaxAgeByName(name);
 
+        ResponseStatisticsDto expectedResult = getStatisticsDto(count, maxAge);
         assertThat(actualResult).isNotNull();
         assertThat(actualResult).isEqualTo(expectedResult);
     }
