@@ -1,5 +1,6 @@
 package com.greenblat.naumentask.services;
 
+import com.greenblat.naumentask.exception.EmptyFormException;
 import com.greenblat.naumentask.model.Person;
 import com.greenblat.naumentask.repositories.PersonRepository;
 import com.greenblat.naumentask.repositories.StatisticsRepository;
@@ -10,10 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,9 +46,25 @@ class PersonServiceTest {
         verifyNoInteractions(restTemplate);
     }
 
+    @Test
+    void itShouldThrownIfNameIsBlankOrNull() {
+        String name = " ";
+        assertThatThrownBy(() -> personService.getPersonsAgeByName(name))
+                .isInstanceOf(EmptyFormException.class)
+                .hasMessageContaining("name is empty");
+
+        assertThatThrownBy(() -> personService.getPersonsAgeByName(null))
+                .isInstanceOf(EmptyFormException.class)
+                .hasMessageContaining("name is empty");
+    }
+
 
     @Test
     void itShouldGetNamesWithMaxAge() {
+        // When
+        personService.getNamesWithMaxAge();
+
+        // Then
         verify(personRepository).findPeopleWithMaxAge();
     }
 
