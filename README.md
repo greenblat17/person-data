@@ -56,7 +56,7 @@ Set environment variables
   export \
   DB_URL=postgresql://host:port/database \
   DB_USERNAME=username \
-  DB_PASSWORD=password \
+  DB_PASSWORD=password 
 ```
 
 Start the server
@@ -65,6 +65,14 @@ Start the server
   mvn spring-boot:run
 ```
 
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  mvn clean test
+```
 
 ## API Reference
 
