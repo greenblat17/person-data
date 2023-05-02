@@ -1,6 +1,6 @@
 package com.greenblat.naumentask.reader;
 
-import com.greenblat.naumentask.exception.PersonFileException;
+import com.greenblat.naumentask.exception.PersonFileNotFoundException;
 import com.greenblat.naumentask.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,7 +65,7 @@ class PersonReaderTest {
         String file = path + "names-not-found.txt";
 
         assertThatThrownBy(() -> underTest.readFile(file))
-                .isInstanceOf(PersonFileException.class)
+                .isInstanceOf(PersonFileNotFoundException.class)
                 .hasMessageContaining(String.format("File with name %s not found", file));
     }
 

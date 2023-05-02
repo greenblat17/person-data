@@ -1,6 +1,6 @@
 package com.greenblat.naumentask.reader;
 
-import com.greenblat.naumentask.exception.PersonFileException;
+import com.greenblat.naumentask.exception.PersonFileNotFoundException;
 import com.greenblat.naumentask.model.Person;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +32,7 @@ public class PersonReader implements Reader<Person> {
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Age is in the wrong format");
         }  catch (IOException e) {
-            throw new PersonFileException(String.format("File with name %s not found", fileName));
+            throw new PersonFileNotFoundException(String.format("File with name %s not found", fileName));
         }
 
         return people;
