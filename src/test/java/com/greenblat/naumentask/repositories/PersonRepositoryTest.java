@@ -4,6 +4,8 @@ import com.greenblat.naumentask.model.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,19 +60,76 @@ class PersonRepositoryTest {
         Person personWithMaxAge1 = new Person(null, "Jim", maxAge, null);
         Person personWithMaxAge2 = new Person(null, "John", maxAge, null);
 
-        List<Person> people = List.of(
+        List<Person> expected = List.of(
                 personWithMaxAge1,
                 personWithMaxAge2
         );
 
-        // When
         underTest.save(personWithDefaultAge);
         underTest.save(personWithMaxAge1);
         underTest.save(personWithMaxAge2);
 
+        // When
+
+        Page<Person> actual = underTest.findPeopleWithMaxAge(PageRequest.of(0, 5));
+
         // Then
-        List<Person> peopleWithMaxAge = underTest.findPeopleWithMaxAge();
-        assertThat(peopleWithMaxAge).isEqualTo(people);
+        assertThat(actual.getContent()).isEqualTo(expected);
+    }
+
+    @Test
+    void itShouldFindPersonWithMaxAgeIfPersonWithMaxAgeGreaterThanFive() {
+        // Given
+        int defaultAge = 10;
+        int maxAge = 100;
+
+        Person personWithDefaultAge = new Person(null, "Alex", defaultAge, null);
+        Person personWithMaxAge1 = new Person(null, "Jim", maxAge, null);
+        Person personWithMaxAge2 = new Person(null, "John", maxAge, null);
+        Person personWithMaxAge3 = new Person(null, "John", maxAge, null);
+        Person personWithMaxAge4 = new Person(null, "John", maxAge, null);
+        Person personWithMaxAge5 = new Person(null, "John", maxAge, null);
+        Person personWithMaxAge6 = new Person(null, "John", maxAge, null);
+
+        List<Person> expectedSecondPage = List.of(
+                personWithMaxAge6
+        );
+
+        underTest.save(personWithDefaultAge);
+        underTest.save(personWithMaxAge1);
+        underTest.save(personWithMaxAge2);
+        underTest.save(personWithMaxAge3);
+        underTest.save(personWithMaxAge4);
+        underTest.save(personWithMaxAge5);
+        underTest.save(personWithMaxAge6);
+
+        // When
+
+        Page<Person> actual = underTest.findPeopleWithMaxAge(PageRequest.of(1, 5));
+
+        // Then
+        assertThat(actual.getContent()).isEqualTo(expectedSecondPage);
+    }
+
+    @Test
+    void itShouldReturnCountPeopleWithMaxAge() {
+        // Given
+        int defaultAge = 10;
+        int maxAge = 100;
+
+        Person personWithDefaultAge = new Person(null, "Alex", defaultAge, null);
+        Person personWithMaxAge1 = new Person(null, "Jim", maxAge, null);
+        Person personWithMaxAge2 = new Person(null, "John", maxAge, null);
+
+        underTest.save(personWithDefaultAge);
+        underTest.save(personWithMaxAge1);
+        underTest.save(personWithMaxAge2);
+
+        // When
+        long actual = underTest.countPersonByMaxAge();
+
+        // Then
+        assertThat(actual).isEqualTo(2);
     }
 
     @Test
