@@ -46,10 +46,9 @@ public class PersonService {
 
         if (personByName.isEmpty()) {
             RestPersonDto personDto = getPersonWithNotFoundName(name);
-            if (personDto.getAge() == notFoundAge) {
-                personDto.setAge(defaultAge);
-                personDto.setCount(startCount);
-            }
+
+            setDefaultValuesToPersonDto(personDto);
+
             savePerson(personDto);
 
             return personDto.getAge();
@@ -59,6 +58,13 @@ public class PersonService {
         statisticsRepository.updateCountByName(person.getName());
 
         return person.getAge();
+    }
+
+    private void setDefaultValuesToPersonDto(RestPersonDto personDto) {
+        if (personDto.getAge() == notFoundAge) {
+            personDto.setAge(defaultAge);
+            personDto.setCount(startCount);
+        }
     }
 
     public List<Person> getNamesWithMaxAge() {
