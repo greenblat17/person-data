@@ -2,13 +2,17 @@ package com.greenblat.naumentask.services;
 
 import com.greenblat.naumentask.exception.EmptyFormException;
 import com.greenblat.naumentask.model.Person;
+import com.greenblat.naumentask.model.dto.RestPersonDto;
 import com.greenblat.naumentask.repositories.PersonRepository;
 import com.greenblat.naumentask.repositories.StatisticsRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
@@ -26,6 +30,10 @@ class PersonServiceTest {
     private StatisticsRepository statisticsRepository;
     @Mock
     private RestTemplate restTemplate;
+    @Mock
+    private Environment environment;
+    @Captor
+    private ArgumentCaptor<Person> personArgumentCaptor;
 
     @InjectMocks
     private PersonService personService;
@@ -58,6 +66,42 @@ class PersonServiceTest {
                 .hasMessageContaining("name is empty");
     }
 
+    @Test
+    void itShouldSavePersonIfPersonWithNameDoesNotExist() {
+        // Given
+        String name = "Alex";
+        doReturn(Optional.empty()).when(personRepository).findPersonByName(name);
+
+        // .. Get personDto from Agify
+        int count = 10;
+        int age = 20;
+        RestPersonDto personDto = getPersonDto(count, age, name);
+
+        // .. Stubs env variables
+        doReturn("https://api.agify.io?name=").when(environment).getRequiredProperty("api.agify.url");
+        doReturn("0").when(environment).getRequiredProperty("person.age.not-found-value");
+        doReturn("1000").when(environment).getRequiredProperty("person.age.default-value");
+        doReturn("1").when(environment).getRequiredProperty("person.count.start-value");
+
+        doReturn(personDto).when(restTemplate)
+                .getForObject("https://api.agify.io?name=" + name, RestPersonDto.class);
+
+        // When
+        int actualAge = personService.getPersonsAgeByName(name);
+
+        // Then
+        assertThat(actualAge).isEqualTo(age);
+
+        verify(personRepository).save(any(Person.class));
+
+        verify(personRepository).save(personArgumentCaptor.capture());
+        Person personArgumentCaptorValue = personArgumentCaptor.getValue();
+
+        Person expecedPerson = getPerson(name, age);
+        assertThat(personArgumentCaptorValue.getName()).isEqualTo(expecedPerson.getName());
+    }
+
+
 
     @Test
     void itShouldGetNamesWithMaxAge() {
@@ -71,6 +115,14 @@ class PersonServiceTest {
     private Person getPerson(String name, int age) {
         return Person.builder()
                 .name(name)
+                .age(age)
+                .build();
+    }
+
+    private RestPersonDto getPersonDto(int count, int age, String name) {
+        return RestPersonDto.builder()
+                .name(name)
+                .count(count)
                 .age(age)
                 .build();
     }
