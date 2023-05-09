@@ -88,15 +88,19 @@ To run tests, run the following command
   GET localhost:8080/statistics/count?page=${pageNumber}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `pageNumber` | `int` | **Required**. **Default Value = 0**. page number with names |
+| Parameter | Type     | Description                                                     |
+| :-------- | :------- |:----------------------------------------------------------------|
+| `pageNumber` | `int` | **Required**. **Default Value = 0**. page number for count page |
 
 #### Get the name with the highest age
 
 ```http
-  GET localhost:8080/statistics/name-by-max-age
+  GET localhost:8080/statistics/name-by-max-age?page=${pageNumber}
 ```
+
+| Parameter | Type     | Description                                                             |
+| :-------- | :------- |:------------------------------------------------------------------------|
+| `pageNumber` | `int` | **Required**. **Default Value = 0**. page number for names with max age |
 
 #### Get full stats by name
 
