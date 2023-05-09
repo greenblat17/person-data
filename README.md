@@ -29,11 +29,11 @@
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`DB_URL=url`
+`DB_URL` - url for db
 
-`DB_USERNAME=username`
+`DB_USERNAME=username` - username for db
 
-`DB_PASSWORD=password`
+`DB_PASSWORD=password` - password for db
 
 
 ## Run Locally
