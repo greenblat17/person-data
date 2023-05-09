@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class EmptyFormException extends RuntimeException {
-    public EmptyFormException(String message) {
+public class EmptyNameException extends RuntimeException {
+    public EmptyNameException(String message) {
         super(message);
     }
 }

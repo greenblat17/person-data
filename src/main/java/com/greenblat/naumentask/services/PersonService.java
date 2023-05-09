@@ -1,6 +1,6 @@
 package com.greenblat.naumentask.services;
 
-import com.greenblat.naumentask.exception.EmptyFormException;
+import com.greenblat.naumentask.exception.EmptyNameException;
 import com.greenblat.naumentask.model.Person;
 import com.greenblat.naumentask.model.Statistics;
 import com.greenblat.naumentask.model.dto.RestPersonDto;
@@ -32,7 +32,7 @@ public class PersonService {
     @Transactional
     public int getPersonsAgeByName(String name) {
         if (name == null || name.isBlank()) {
-            throw new EmptyFormException("name is empty");
+            throw new EmptyNameException("name is empty");
         }
 
         Optional<Person> personByName = personRepository.findPersonByName(name);

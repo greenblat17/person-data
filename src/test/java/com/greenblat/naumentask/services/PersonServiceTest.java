@@ -1,6 +1,6 @@
 package com.greenblat.naumentask.services;
 
-import com.greenblat.naumentask.exception.EmptyFormException;
+import com.greenblat.naumentask.exception.EmptyNameException;
 import com.greenblat.naumentask.model.Person;
 import com.greenblat.naumentask.model.dto.RestPersonDto;
 import com.greenblat.naumentask.repositories.PersonRepository;
@@ -58,11 +58,11 @@ class PersonServiceTest {
     void itShouldThrownIfNameIsBlankOrNull() {
         String name = " ";
         assertThatThrownBy(() -> personService.getPersonsAgeByName(name))
-                .isInstanceOf(EmptyFormException.class)
+                .isInstanceOf(EmptyNameException.class)
                 .hasMessageContaining("name is empty");
 
         assertThatThrownBy(() -> personService.getPersonsAgeByName(null))
-                .isInstanceOf(EmptyFormException.class)
+                .isInstanceOf(EmptyNameException.class)
                 .hasMessageContaining("name is empty");
     }
 
