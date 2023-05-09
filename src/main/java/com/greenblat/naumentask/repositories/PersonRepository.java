@@ -27,7 +27,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     )
     List<Person> findPeopleWithMaxAge();
 
-    @Query("SELECT p.age " +
+    @Query("SELECT DISTINCT p.age " +
             "FROM Person p " +
             "WHERE p.age= (" +
                 "SELECT MAX(p1.age) " +
