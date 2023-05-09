@@ -17,8 +17,11 @@ public class StatisticsController {
     private final StatisticsService statisticsService;
 
     @GetMapping("/name-by-max-age")
-    public String nameByMaxAge(Model model) {
-        model.addAttribute("peopleWithMaxAge", statisticsService.getNamesWithMaxAge());
+    public String nameByMaxAge(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model) {
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("nextPage", page + 1);
+        model.addAttribute("size", statisticsService.getCountPeopleWithMaxAge());
+        model.addAttribute("peopleWithMaxAge", statisticsService.getNamesWithMaxAge(page));
 
         return "statistics/max-age";
     }

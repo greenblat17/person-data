@@ -13,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -40,7 +39,11 @@ public class StatisticsService {
         return new ResponseStatisticsDto(count, maxAge);
     }
 
-    public List<Person> getNamesWithMaxAge() {
-        return personRepository.findPeopleWithMaxAge();
+    public Page<Person> getNamesWithMaxAge(int page) {
+        return personRepository.findPeopleWithMaxAge(PageRequest.of(page, pageSize, Sort.by("id").ascending()));
+    }
+
+    public Long getCountPeopleWithMaxAge() {
+        return personRepository.countPersonByMaxAge();
     }
 }

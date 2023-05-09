@@ -19,6 +19,9 @@
     <div class="card2" th:each="person : ${peopleWithMaxAge}">
         <span th:text="${person.name + ' : ' + person.age}"></span>
     </div>
+
+    <a class="pageRef" th:if="${prevPage >= 0}" th:href="@{'/statistics/name-by-max-age?page=' + ${prevPage}}" th:text="Back"/>
+    <a id="forw" class="pageRef" th:if="${nextPage * 5 < size}" th:href="@{'/statistics/name-by-max-age?page=' + ${nextPage}}" th:text="Forward"/>
 </div>
 
 <div class="bottompan">
