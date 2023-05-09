@@ -26,6 +26,15 @@ class StatisticsServiceTest {
     private StatisticsService statisticsService;
 
     @Test
+    void itShouldReturnCountStatisticsInDatabase() {
+        // When
+        statisticsService.getCountStatisticsInDb();
+
+        // Then
+        verify(statisticsRepository).count();
+    }
+
+    @Test
     void itShouldGetFullStatisticsByName() {
         // Given
         String name = "Alex";
@@ -49,12 +58,12 @@ class StatisticsServiceTest {
     }
 
     @Test
-    void itShouldGetNamesWithMaxAge() {
+    void ifShouldReturnCountPeopleWithMaxAge() {
         // When
-        statisticsService.getNamesWithMaxAge();
+        statisticsService.getCountPeopleWithMaxAge();
 
         // Then
-        verify(personRepository).findPeopleWithMaxAge();
+        verify(personRepository).countPersonByMaxAge();
     }
 
     private ResponseStatisticsDto getStatisticsDto(int count, int age) {
