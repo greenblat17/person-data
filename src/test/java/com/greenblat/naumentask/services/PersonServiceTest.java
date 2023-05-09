@@ -67,7 +67,7 @@ class PersonServiceTest {
     }
 
     @Test
-    void itShouldSavePersonIfPersonWithNameDoesNotExist() {
+    void itShouldSavePersonIfPersonWithNameDoesNotExistInDatabaseAndExistInAgify() {
         // Given
         String name = "Alex";
         doReturn(Optional.empty()).when(personRepository).findPersonByName(name);
@@ -97,8 +97,45 @@ class PersonServiceTest {
         verify(personRepository).save(personArgumentCaptor.capture());
         Person personArgumentCaptorValue = personArgumentCaptor.getValue();
 
-        Person expecedPerson = getPerson(name, age);
-        assertThat(personArgumentCaptorValue.getName()).isEqualTo(expecedPerson.getName());
+        assertThat(personArgumentCaptorValue.getName()).isEqualTo(name);
+        assertThat(personArgumentCaptorValue.getAge()).isEqualTo(age);
+        assertThat(personArgumentCaptorValue.getStatistics()).isNotNull();
+        assertThat(personArgumentCaptorValue.getStatistics().getCount()).isEqualTo(count);
+    }
+
+    @Test
+    void itShouldSavePersonIfPersonWithNameDoesNotExistInDatabaseAndNotExistInAgify() {
+        // Given
+        String name = "Alex";
+        doReturn(Optional.empty()).when(personRepository).findPersonByName(name);
+
+        // .. Get personDto from Agify
+        RestPersonDto personDto = getPersonDto(0, 0, name);
+
+        // .. Stubs env variables
+        doReturn("https://api.agify.io?name=").when(environment).getRequiredProperty("api.agify.url");
+        doReturn("0").when(environment).getRequiredProperty("person.age.not-found-value");
+        doReturn("1000").when(environment).getRequiredProperty("person.age.default-value");
+        doReturn("1").when(environment).getRequiredProperty("person.count.start-value");
+
+        doReturn(personDto).when(restTemplate)
+                .getForObject("https://api.agify.io?name=" + name, RestPersonDto.class);
+
+        // When
+        int actualAge = personService.getPersonsAgeByName(name);
+
+        // Then
+        assertThat(actualAge).isEqualTo(1000);
+
+        verify(personRepository).save(any(Person.class));
+
+        verify(personRepository).save(personArgumentCaptor.capture());
+        Person personArgumentCaptorValue = personArgumentCaptor.getValue();
+
+        assertThat(personArgumentCaptorValue.getName()).isEqualTo(name);
+        assertThat(personArgumentCaptorValue.getAge()).isEqualTo(1000);
+        assertThat(personArgumentCaptorValue.getStatistics()).isNotNull();
+        assertThat(personArgumentCaptorValue.getStatistics().getCount()).isEqualTo(1);
     }
 
 
