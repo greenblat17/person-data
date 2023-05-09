@@ -1,5 +1,6 @@
 package com.greenblat.naumentask.services;
 
+import com.greenblat.naumentask.model.Person;
 import com.greenblat.naumentask.model.Statistics;
 import com.greenblat.naumentask.model.dto.ResponseStatisticsDto;
 import com.greenblat.naumentask.repositories.PersonRepository;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -35,5 +38,9 @@ public class StatisticsService {
         Integer count = statisticsRepository.findCountByPerson_Name(name);
         Integer maxAge = personRepository.findMaxAgeByName(name);
         return new ResponseStatisticsDto(count, maxAge);
+    }
+
+    public List<Person> getNamesWithMaxAge() {
+        return personRepository.findPeopleWithMaxAge();
     }
 }

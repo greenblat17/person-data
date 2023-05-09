@@ -1,6 +1,5 @@
 package com.greenblat.naumentask.controllers;
 
-import com.greenblat.naumentask.services.PersonService;
 import com.greenblat.naumentask.services.StatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class StatisticsController {
 
-    private final PersonService personService;
     private final StatisticsService statisticsService;
 
     @GetMapping("/name-by-max-age")
     public String nameByMaxAge(Model model) {
-        model.addAttribute("peopleWithMaxAge", personService.getNamesWithMaxAge());
+        model.addAttribute("peopleWithMaxAge", statisticsService.getNamesWithMaxAge());
 
         return "statistics/max-age";
     }

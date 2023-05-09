@@ -102,16 +102,6 @@ class PersonServiceTest {
     }
 
 
-
-    @Test
-    void itShouldGetNamesWithMaxAge() {
-        // When
-        personService.getNamesWithMaxAge();
-
-        // Then
-        verify(personRepository).findPeopleWithMaxAge();
-    }
-
     private Person getPerson(String name, int age) {
         return Person.builder()
                 .name(name)

@@ -48,6 +48,15 @@ class StatisticsServiceTest {
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 
+    @Test
+    void itShouldGetNamesWithMaxAge() {
+        // When
+        statisticsService.getNamesWithMaxAge();
+
+        // Then
+        verify(personRepository).findPeopleWithMaxAge();
+    }
+
     private ResponseStatisticsDto getStatisticsDto(int count, int age) {
         return new ResponseStatisticsDto(
                 count,
