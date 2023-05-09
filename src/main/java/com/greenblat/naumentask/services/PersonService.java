@@ -7,7 +7,7 @@ import com.greenblat.naumentask.model.dto.RestPersonDto;
 import com.greenblat.naumentask.repositories.PersonRepository;
 import com.greenblat.naumentask.repositories.StatisticsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -23,18 +23,12 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final StatisticsRepository statisticsRepository;
     private final RestTemplate restTemplate;
+    private final Environment environment;
 
-    @Value("${api.agify.url}")
-    private String url;
-
-    @Value("${person.age.default-value}")
-    private  int defaultAge;
-
-    @Value("${person.age.not-found-value}")
-    private  int notFoundAge;
-
-    @Value("${person.count.start-value}")
-    private int startCount;
+    private static final String AGIFY_URL_KEY = "api.agify.url";
+    private static final String DEFAULT_AGE_KEY = "person.age.default-value";
+    private static final String NOT_FOUND_AGE_KEY = "person.age.not-found-value";
+    private static final String START_COUNT_KEY = "person.count.start-value";
 
     @Transactional
     public int getPersonsAgeByName(String name) {
@@ -61,6 +55,10 @@ public class PersonService {
     }
 
     private void setDefaultValuesToPersonDto(RestPersonDto personDto) {
+        int notFoundAge = Integer.parseInt(environment.getRequiredProperty(NOT_FOUND_AGE_KEY));
+        int defaultAge = Integer.parseInt(environment.getRequiredProperty(DEFAULT_AGE_KEY));
+        int startCount = Integer.parseInt(environment.getRequiredProperty(START_COUNT_KEY));
+
         if (personDto.getAge() == notFoundAge) {
             personDto.setAge(defaultAge);
             personDto.setCount(startCount);
@@ -72,7 +70,7 @@ public class PersonService {
     }
 
     private RestPersonDto getPersonWithNotFoundName(String requestName) {
-        return restTemplate.getForObject(url + requestName, RestPersonDto.class);
+        return restTemplate.getForObject(environment.getRequiredProperty(AGIFY_URL_KEY) + requestName, RestPersonDto.class);
     }
 
     private void savePerson(RestPersonDto personDto) {
@@ -86,10 +84,12 @@ public class PersonService {
 
         person.setStatistics(statistics);
 
+
         personRepository.save(person);
     }
 
     private Person restPersonDtoMapToPerson(RestPersonDto restPersonDto) {
+        System.out.println(restPersonDto);
         return Person.builder()
                 .age(restPersonDto.getAge())
                 .name(restPersonDto.getName())
