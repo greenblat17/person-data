@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +28,7 @@ public class StatisticsService {
     }
 
     public Page<Statistics> getStatisticsPeople(Integer page) {
-        return statisticsRepository.findAll(PageRequest.of(page, pageSize));
+        return statisticsRepository.findAll(PageRequest.of(page, pageSize, Sort.by("id").ascending()));
     }
 
     public ResponseStatisticsDto getFullStatisticsByName(String name) {
